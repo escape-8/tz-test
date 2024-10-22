@@ -9,6 +9,11 @@ $config = [
     'timeZone' => 'Europe/Moscow',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'container' => [
+        'definitions' => [
+            \app\repositories\interfaces\RequestRepositoryInterface::class => \app\repositories\RequestRepository::class
+        ]
+    ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
