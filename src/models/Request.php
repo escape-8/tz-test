@@ -62,4 +62,9 @@ class Request extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Manager::class, ['id' => 'manager_id']);
     }
+
+    public function getDuplicateId(): ?int
+    {
+        return $this->duplicate_id;
+    }
 }

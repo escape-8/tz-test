@@ -8,7 +8,7 @@ $config = [
     'language' => 'ru',
     'timeZone' => 'Europe/Moscow',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'queue'],
     'container' => [
         'definitions' => [
             \app\repositories\interfaces\RequestRepositoryInterface::class => \app\repositories\RequestRepository::class
@@ -43,6 +43,13 @@ $config = [
             'showScriptName' => false,
             'rules' => [
             ],
+        ],
+        'queue' => [
+            'class' => \yii\queue\db\Queue::class,
+            'db' => 'db', // Компонент подключения к БД или его конфиг
+            'tableName' => '{{%queue}}', // Имя таблицы
+            'channel' => 'default', // Выбранный для очереди канал
+            'mutex' => \yii\mutex\MysqlMutex::class, // Мьютекс для синхронизации запросов
         ],
     ],
 ];

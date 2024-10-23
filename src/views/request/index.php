@@ -38,6 +38,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $request->manager ? $request->manager->name : null;
                 }
             ],
+            [   'header' => 'Предыдущая заявка',
+                'class' => yii\grid\ActionColumn::class,
+                'template' => '{view}',
+                'buttons' => [
+                    'view' => function ($url, Request $request) {
+                        $duplicateId = $request->getDuplicateId();
+                        return isset($duplicateId) ?
+                            Html::a("№ $duplicateId", ['request/view', 'id' => $duplicateId]) :
+                            '—';
+                    },
+                ],
+                'contentOptions' => ['style' => 'width:1px'],
+            ],
             [
                 'class' => yii\grid\ActionColumn::class,
                 'template' => '{view}',

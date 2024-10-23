@@ -41,8 +41,9 @@ class RequestController extends Controller
     {
         $model = new Request();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $this->requestService->createRequest($model);
+            return $this->redirect('index');
         }
 
         return $this->render('create', [
