@@ -11,7 +11,8 @@ $config = [
     'bootstrap' => ['log', 'queue'],
     'container' => [
         'definitions' => [
-            \app\repositories\interfaces\RequestRepositoryInterface::class => \app\repositories\RequestRepository::class
+            \app\repositories\interfaces\RequestRepositoryInterface::class => \app\repositories\RequestRepository::class,
+            \app\repositories\interfaces\ManagerRepositoryInterface::class => \app\repositories\ManagerRepository::class
         ]
     ],
     'aliases' => [

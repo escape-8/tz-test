@@ -13,15 +13,17 @@ use yii\data\ActiveDataProvider;
 class RequestService
 {
     private $requestRepository;
+    private $queue;
 
     public function __construct(RequestRepositoryInterface $requestRepository)
     {
         $this->requestRepository = $requestRepository;
+        $this->queue = Yii::$app->queue;
     }
 
-    public function createRequest(Request $request)
+    public function createRequest(Request $request): void
     {
-        Yii::$app->queue->push(new RequestCreateJob($this->requestRepository, [
+        $this->queue->push(new RequestCreateJob($this->requestRepository, [
             'request' => $request
         ]));
     }

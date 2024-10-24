@@ -38,8 +38,6 @@ class Request extends \yii\db\ActiveRecord
         return [
             [['email', 'phone'], 'required'],
             ['email', 'email'],
-            ['manager_id', 'integer'],
-            ['manager_id', 'exist', 'targetClass' => Manager::class, 'targetAttribute' => 'id'],
             [['email', 'phone'], 'string', 'max' => 255],
             ['text', 'safe'],
         ];
