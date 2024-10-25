@@ -5,7 +5,8 @@
         "php": ">=7.3.0",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
-        "vlucas/phpdotenv": "3.3.3"
+        "vlucas/phpdotenv": "3.3.3",
+        "yiisoft/yii2-queue": "^2.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "2.1.4",
@@ -15,6 +16,9 @@
         "process-timeout": 1800,
         "fxp-asset": {
             "enabled": false
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     },
     "repositories": [

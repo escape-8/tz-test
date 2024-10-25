@@ -57,4 +57,9 @@ class Manager extends \yii\db\ActiveRecord
             'id'
         );
     }
+
+    public function getRequests()
+    {
+        return $this->hasMany(Request::class, ['manager_id' => 'id']);
+    }
 }

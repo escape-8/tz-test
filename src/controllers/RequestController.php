@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\services\RequestService;
 use Yii;
 use app\models\Request;
 use app\models\RequestSearch;
@@ -10,6 +11,14 @@ use yii\web\NotFoundHttpException;
 
 class RequestController extends Controller
 {
+    private $requestService;
+
+    public function __construct($id, $module, RequestService $requestService,  $config = [])
+    {
+        $this->requestService = $requestService;
+        parent::__construct($id, $module, $config = []);
+    }
+
     public function actionIndex()
     {
         $searchModel = new RequestSearch();
@@ -32,8 +41,9 @@ class RequestController extends Controller
     {
         $model = new Request();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $this->requestService->createRequest($model);
+            return $this->redirect('index');
         }
 
         return $this->render('create', [
@@ -52,6 +62,13 @@ class RequestController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionManagerRequests($id)
+    {
+        $dataProvider = $this->requestService->filterRequestByManagerId($id);
+
+        return $this->render('index', compact('dataProvider'));
     }
 
     protected function findModel($id)

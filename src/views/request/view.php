@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Request;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -32,6 +33,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->manager ? $model->manager->name : null
             ],
             'text:ntext',
+            [
+                'label' => 'Предыдущая заявка',
+                'format' => 'raw',
+                'value' => function (Request $request) {
+                    $duplicateId = $request->getDuplicateId();
+                    return isset($duplicateId) ?
+                        Html::a("№ $duplicateId", ['request/view', 'id' => $duplicateId]) :
+                        '—';
+                },
+            ],
         ],
     ]) ?>
 

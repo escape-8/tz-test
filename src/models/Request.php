@@ -38,8 +38,6 @@ class Request extends \yii\db\ActiveRecord
         return [
             [['email', 'phone'], 'required'],
             ['email', 'email'],
-            ['manager_id', 'integer'],
-            ['manager_id', 'exist', 'targetClass' => Manager::class, 'targetAttribute' => 'id'],
             [['email', 'phone'], 'string', 'max' => 255],
             ['text', 'safe'],
         ];
@@ -61,5 +59,10 @@ class Request extends \yii\db\ActiveRecord
     public function getManager()
     {
         return $this->hasOne(Manager::class, ['id' => 'manager_id']);
+    }
+
+    public function getDuplicateId(): ?int
+    {
+        return $this->duplicate_id;
     }
 }
